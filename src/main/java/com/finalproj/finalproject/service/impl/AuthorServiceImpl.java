@@ -1,9 +1,9 @@
 package com.finalproj.finalproject.service.impl;
 
-import com.finalproj.finalproject.model.Category;
+import com.finalproj.finalproject.model.Author;
 import com.finalproj.finalproject.model.ResponseModel;
-import com.finalproj.finalproject.repository.CategoryRepository;
-import com.finalproj.finalproject.service.CategoryService;
+import com.finalproj.finalproject.repository.AuthorRepository;
+import com.finalproj.finalproject.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,130 +16,127 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements CategoryService {
+public class AuthorServiceImpl implements AuthorService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private AuthorRepository authorRepository;
 
     @Override
-    public ResponseEntity<?> saveCategory(Category category) {
-
+    public ResponseEntity<?> saveAuthor(Author author) {
         ResponseModel responseModel = new ResponseModel();
-        category = categoryRepository.save(category);
+        author = authorRepository.save(author);
 
         try {
-            if (category != null) {
-                responseModel.setMessage("Category Saved Successfully");
+            if (author != null) {
+                responseModel.setMessage("Author Saved Successfully");
                 responseModel.setStatus(true);
                 return new ResponseEntity<>(responseModel, HttpStatus.CREATED);
             }else{
-                responseModel.setMessage("Failed To Save Category");
+                responseModel.setMessage("Failed To Save Author");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            responseModel.setMessage("Failed To Save Category");
+            responseModel.setMessage("Failed To Save Author");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<?> updateCategory(int categoryId, Category category) {
+    public ResponseEntity<?> updateAuthor(int authorId, Author author) {
         ResponseModel responseModel = new ResponseModel();
 
         try {
 
-            Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+            Optional<Author> optionalAuthor = authorRepository.findById(authorId);
 
-            if (!optionalCategory.isPresent()){
-                responseModel.setMessage("There's No Category Exists");
+            if (!optionalAuthor.isPresent()){
+                responseModel.setMessage("There's No Author Exists");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
-            category.setCategoryId(optionalCategory.get().getCategoryId());
+            author.setAuthorId(optionalAuthor.get().getAuthorId());
 
-            category = categoryRepository.save(category);
+            author = authorRepository.save(author);
 
-            if (category != null) {
-                responseModel.setMessage("Category Details Updated Successfully");
+            if (author != null) {
+                responseModel.setMessage("Author Details Updated Successfully");
                 responseModel.setStatus(true);
                 return new ResponseEntity<>(responseModel, HttpStatus.OK);
             }else{
-                responseModel.setMessage("Failed To Update Category");
+                responseModel.setMessage("Failed To Update Author");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            responseModel.setMessage("Failed To Update Category");
+            responseModel.setMessage("Failed To Update Author");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<?> getCategory(int categoryId) {
+    public ResponseEntity<?> getAuthor(int authorId) {
         ResponseModel responseModel = new ResponseModel();
 
         try {
 
-            Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+            Optional<Author> optionalAuthor = authorRepository.findById(authorId);
 
-            if (!optionalCategory.isPresent()){
-                responseModel.setMessage("There's No Category  Exists");
+            if (!optionalAuthor.isPresent()){
+                responseModel.setMessage("There's No Author Exists ");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
-            return new ResponseEntity<>(optionalCategory.get(),HttpStatus.OK);
-
+            return new ResponseEntity<>(optionalAuthor.get(),HttpStatus.OK);
 
         } catch (Exception e) {
-            responseModel.setMessage("Failed To Retrieve Category");
+            responseModel.setMessage("Failed To Retrieve Author");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<?> deleteCategory(int categoryId) {
+    public ResponseEntity<?> deleteAuthor(int authorId) {
         ResponseModel responseModel = new ResponseModel();
 
         try {
 
-            Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+            Optional<Author> optionalAuthor = authorRepository.findById(authorId);
 
-            if (!optionalCategory.isPresent()){
-                responseModel.setMessage(" There's No Category Exists");
+            if (!optionalAuthor.isPresent()){
+                responseModel.setMessage("There's No  Author Exists");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
-            categoryRepository.deleteById(optionalCategory.get().getCategoryId());
-            responseModel.setMessage("Category Removed Successfully");
+            authorRepository.deleteById(optionalAuthor.get().getAuthorId());
+            responseModel.setMessage("Author Removed Successfully");
             responseModel.setStatus(true);
             return new ResponseEntity<>(responseModel,HttpStatus.OK);
 
         } catch (Exception e) {
-            responseModel.setMessage("Failed To Delete Category");
+            responseModel.setMessage("Failed To Delete Author");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<?> getAllCategories() {
-
+    public ResponseEntity<?> getAllAuthors() {
         ResponseModel responseModel = new ResponseModel();
 
         try {
-            List<Category> list= new ArrayList<>();
-            list=categoryRepository.findAll();
+            List<Author> list= new ArrayList<>();
+            list=authorRepository.findAll();
 
             if (list.isEmpty()){
-                responseModel.setMessage("Nothing  Found");
                 responseModel.setStatus(false);
+                responseModel.setMessage("Nothing Found");
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
@@ -150,6 +147,5 @@ public class CategoryServiceImpl implements CategoryService {
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
-
     }
 }

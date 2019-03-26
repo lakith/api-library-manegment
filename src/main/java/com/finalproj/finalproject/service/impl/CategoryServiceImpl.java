@@ -1,9 +1,9 @@
 package com.finalproj.finalproject.service.impl;
 
-import com.finalproj.finalproject.model.NewsPaper;
+import com.finalproj.finalproject.model.Category;
 import com.finalproj.finalproject.model.ResponseModel;
-import com.finalproj.finalproject.repository.NewsPaperRepository;
-import com.finalproj.finalproject.service.NewsPaperService;
+import com.finalproj.finalproject.repository.CategoryRepository;
+import com.finalproj.finalproject.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,144 +14,142 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Transactional
-public class NewsPaperServiceImpl implements NewsPaperService {
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private NewsPaperRepository newsPaperRepository;
+    private CategoryRepository categoryRepository;
 
     @Override
-    public ResponseEntity<?> saveNewsPaper(NewsPaper newsPaper) {
+    public ResponseEntity<?> saveCategory(Category category) {
+
         ResponseModel responseModel = new ResponseModel();
-        newsPaper = newsPaperRepository.save(newsPaper);
+        category = categoryRepository.save(category);
 
         try {
-            if (newsPaper != null) {
-                responseModel.setMessage("News Paper Saved Successfully");
+            if (category != null) {
+                responseModel.setMessage("Category Saved Successfully");
                 responseModel.setStatus(true);
                 return new ResponseEntity<>(responseModel, HttpStatus.CREATED);
             }else{
-                responseModel.setMessage("Failed To Save News Paper");
+                responseModel.setMessage("Failed To Save Category");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            responseModel.setMessage("Failed To Save News Paper");
+            responseModel.setMessage("Failed To Save Category");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @Override
-    public ResponseEntity<?> updateNewsPaper(int newsPaperId, NewsPaper newsPaper) {
-
+    public ResponseEntity<?> updateCategory(int categoryId, Category category) {
         ResponseModel responseModel = new ResponseModel();
 
         try {
 
-            Optional<NewsPaper> newsPaperOptional = newsPaperRepository.findById(newsPaperId);
+            Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
 
-            if (!newsPaperOptional.isPresent()){
-                responseModel.setMessage("There's No News Paper Exists");
+            if (!optionalCategory.isPresent()){
+                responseModel.setMessage("There's No Category Exists");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
-            newsPaper.setNewsPaperId(newsPaperOptional.get().getNewsPaperId());
+            category.setCategoryId(optionalCategory.get().getCategoryId());
 
-            newsPaper = newsPaperRepository.save(newsPaper);
+            category = categoryRepository.save(category);
 
-            if (newsPaper != null) {
-                responseModel.setMessage("News Paper Details Updated Successfully");
+            if (category != null) {
+                responseModel.setMessage("Category Details Updated Successfully");
                 responseModel.setStatus(true);
                 return new ResponseEntity<>(responseModel, HttpStatus.OK);
             }else{
-                responseModel.setMessage("Failed To Update News Paper");
+                responseModel.setMessage("Failed To Update Category");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            responseModel.setMessage("Failed To Update News Paper");
+            responseModel.setMessage("Failed To Update Category");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @Override
-    public ResponseEntity<?> getNewsPaper(int newsPaperId) {
+    public ResponseEntity<?> getCategory(int categoryId) {
         ResponseModel responseModel = new ResponseModel();
 
         try {
-            Optional<NewsPaper> newsPaperOptional = newsPaperRepository.findById(newsPaperId);
 
-            if (!newsPaperOptional.isPresent()){
-                responseModel.setMessage("There's No News Paper Exists ");
+            Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+
+            if (!optionalCategory.isPresent()){
+                responseModel.setMessage("There's No Category  Exists");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
-            return new ResponseEntity<>(newsPaperOptional.get(),HttpStatus.OK);
+            return new ResponseEntity<>(optionalCategory.get(),HttpStatus.OK);
+
 
         } catch (Exception e) {
-            responseModel.setMessage("Failed To Get The News Paper ");
+            responseModel.setMessage("Failed To Delete Category");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @Override
-    public ResponseEntity<?> deleteNewsPaper(int newsPaperId) {
+    public ResponseEntity<?> deleteCategory(int categoryId) {
         ResponseModel responseModel = new ResponseModel();
 
-        Optional<NewsPaper> newsPaperOptional = newsPaperRepository.findById(newsPaperId);
-
         try {
-            if (!newsPaperOptional.isPresent()){
-                responseModel.setMessage("There's No News Paper  Exists ");
+
+            Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+
+            if (!optionalCategory.isPresent()){
+                responseModel.setMessage(" There's No Category Exists");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
-            newsPaperRepository.deleteById(newsPaperOptional.get().getNewsPaperId());
-            responseModel.setMessage("News Paper Removed Successfully");
+            categoryRepository.deleteById(optionalCategory.get().getCategoryId());
+            responseModel.setMessage("Category Removed Successfully");
             responseModel.setStatus(true);
             return new ResponseEntity<>(responseModel,HttpStatus.OK);
 
         } catch (Exception e) {
-
-            responseModel.setMessage("Failed To Remove News Paper ");
+            responseModel.setMessage("Failed To Delete Category");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @Override
-    public ResponseEntity<?> getAllNewsPapers() {
+    public ResponseEntity<?> getAllCategories() {
 
         ResponseModel responseModel = new ResponseModel();
 
         try {
-            List<NewsPaper> newsPapers= new ArrayList<>();
-            newsPapers=newsPaperRepository.findAll();
+            List<Category> list= new ArrayList<>();
+            list=categoryRepository.findAll();
 
-            if (newsPapers.isEmpty()){
-                responseModel.setMessage("Nothing Found");
+            if (list.isEmpty()){
+                responseModel.setMessage("Nothing  Found");
                 responseModel.setStatus(false);
                 return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
             }
 
-            return new ResponseEntity<>(newsPapers,HttpStatus.OK);
+            return new ResponseEntity<>(list,HttpStatus.OK);
 
         } catch (Exception e) {
-            responseModel.setMessage("Nothing Found");
+            responseModel.setMessage("Nothing Found ");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
+
     }
 }

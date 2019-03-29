@@ -1,6 +1,7 @@
 package com.finalproj.finalproject.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "manuscript")
@@ -11,6 +12,8 @@ public class Manuscript {
     private int manuscriptId;
     private String manuscriptName;
     private int year;
+    @NotNull
+    private String status;
 
     public Manuscript() {
     }
@@ -37,5 +40,13 @@ public class Manuscript {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

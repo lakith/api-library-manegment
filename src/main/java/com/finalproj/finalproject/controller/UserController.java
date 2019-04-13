@@ -14,6 +14,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/staffUser")
+@CrossOrigin
 public class UserController {
 
     @Autowired

@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/user-role")
+@CrossOrigin
 public class UserRoleController {
 
     @Autowired

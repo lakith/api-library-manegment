@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/authors")
+@CrossOrigin
 public class AuthorController {
 
     @Autowired

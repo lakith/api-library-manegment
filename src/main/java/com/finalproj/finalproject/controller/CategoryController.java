@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/category")
+@CrossOrigin
 public class CategoryController {
 
     @Autowired

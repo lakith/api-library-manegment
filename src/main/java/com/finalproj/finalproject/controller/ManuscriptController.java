@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/manuscripts")
+@CrossOrigin
 public class ManuscriptController {
 
     @Autowired

@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/newsPapers")
+@CrossOrigin
 public class NewsPaperController {
 
 

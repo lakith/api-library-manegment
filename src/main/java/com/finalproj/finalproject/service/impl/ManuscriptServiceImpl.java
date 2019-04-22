@@ -1,5 +1,6 @@
 package com.finalproj.finalproject.service.impl;
 
+import com.finalproj.finalproject.model.Book;
 import com.finalproj.finalproject.model.Manuscript;
 import com.finalproj.finalproject.model.ResponseModel;
 import com.finalproj.finalproject.repository.ManuscriptRepository;
@@ -154,4 +155,25 @@ public class ManuscriptServiceImpl implements ManuscriptService {
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getManuscriptByName(String name) {
+        List<Manuscript> manuscriptList = manuscriptRepository.getManuscriptByName(name);
+        if(manuscriptList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(manuscriptList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getManuscriptByYear(String year) {
+        List<Manuscript> manuscriptList = manuscriptRepository.getManuscriptYear(year);
+        if(manuscriptList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(manuscriptList,HttpStatus.OK);
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package com.finalproj.finalproject.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "manuscript")
@@ -10,9 +11,14 @@ public class Manuscript {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int manuscriptId;
-    private String manuscriptName;
-    private int year;
+
     @NotNull
+    private String manuscriptName;
+
+    private int year;
+
+    @NotNull
+    @Pattern(regexp = "^(rare)$", message= "Input must be 'rare'")
     private String status;
 
     public Manuscript() {

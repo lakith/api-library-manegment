@@ -39,8 +39,6 @@ public class User {
     @JoinColumn(name = "roleId")
     private UserRole userRole;
 
-
-
     public User() {
     }
 

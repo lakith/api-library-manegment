@@ -1,5 +1,6 @@
 package com.finalproj.finalproject.service.impl;
 
+import com.finalproj.finalproject.model.Manuscript;
 import com.finalproj.finalproject.model.NewsPaper;
 import com.finalproj.finalproject.model.ResponseModel;
 import com.finalproj.finalproject.repository.NewsPaperRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,6 +154,26 @@ public class NewsPaperServiceImpl implements NewsPaperService {
             responseModel.setMessage("Nothing Found");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getNewsPapersByName(String name) {
+        List<NewsPaper> newsPapersList = newsPaperRepository.getNewsPaperByName(name);
+        if(newsPapersList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(newsPapersList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getNewsPapersByDate(Date startDate,Date endDate) {
+        List<NewsPaper> newsPapersList = newsPaperRepository.getNewsPaperByDate(startDate,endDate);
+        if(newsPapersList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(newsPapersList,HttpStatus.OK);
         }
     }
 }

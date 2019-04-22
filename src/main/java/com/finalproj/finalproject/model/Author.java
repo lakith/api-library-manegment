@@ -1,6 +1,7 @@
 package com.finalproj.finalproject.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "author")
@@ -9,6 +10,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int authorId;
+    @NotNull
     private String authorName;
 
     public Author() {

@@ -1,5 +1,7 @@
 package com.finalproj.finalproject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,10 +15,14 @@ public class NewsPaper {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int newsPaperId;
+
     @NotNull
     private String newsPaperName;
+
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date issueDate;
+
     @NotNull
     private String status;
 

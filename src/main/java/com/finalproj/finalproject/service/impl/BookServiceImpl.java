@@ -36,7 +36,6 @@ public class BookServiceImpl implements BookService {
     public ResponseEntity<?> saveBook(BookDTO bookDTO) {
 
         ResponseModel responseModel = new ResponseModel();
-
         try {
             Optional<Category> optionalCategory = categoryRepository.findById(bookDTO.getCategoryId());
 
@@ -85,8 +84,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public ResponseEntity<?> updateBook(int bookId, BookDTO bookDTO) {
-        ResponseModel responseModel = new ResponseModel();
 
+        ResponseModel responseModel = new ResponseModel();
         try {
             Optional<Category> optionalCategory = categoryRepository.findById(bookDTO.getCategoryId());
 
@@ -144,8 +143,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public ResponseEntity<?> getBook(int bookId) {
-        ResponseModel responseModel = new ResponseModel();
 
+        ResponseModel responseModel = new ResponseModel();
         try {
             Optional<Book> optionalBook=bookRepository.findById(bookId);
 
@@ -212,4 +211,76 @@ public class BookServiceImpl implements BookService {
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
         }
     }
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getBooksByTitle(String title) {
+        List<Book> bookList = bookRepository.getBookByTitle(title);
+        if(bookList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getBooksByAuthorName(String name) {
+        List<Book> bookList = bookRepository.getBookByAutherName(name);
+        if(bookList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getBooksByAuthorId(int authorId) {
+        List<Book> bookList = bookRepository.getBookByAutherId(authorId);
+        if(bookList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getBooksByCaregoryId(int categoryId) {
+        List<Book> bookList = bookRepository.getBookByCategoryId(categoryId);
+        if(bookList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getBooksByCaregoryName(String categoryName) {
+        List<Book> bookList = bookRepository.getBookByCategoryName(categoryName);
+        if(bookList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getBooksByYear(String year) {
+        List<Book> bookList = bookRepository.getBookByYear(year);
+        if(bookList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getBookspublishType(String type) {
+        List<Book> bookList = bookRepository.getBookByYear(type);
+        if(bookList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookList,HttpStatus.OK);
+        }
+    }
+
+
+
 }

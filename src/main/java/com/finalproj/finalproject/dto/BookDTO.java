@@ -5,7 +5,7 @@ public class BookDTO {
     private int bookId;
     private String title;
     private String isbnNumber;
-    private String year;
+    private int year;
     private double price;
     private String publisher;
     private String status;
@@ -39,11 +39,11 @@ public class BookDTO {
         this.isbnNumber = isbnNumber;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

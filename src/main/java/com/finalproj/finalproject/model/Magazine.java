@@ -1,6 +1,10 @@
 package com.finalproj.finalproject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -10,8 +14,16 @@ public class Magazine{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int magazineId;
+
+    @NotNull
     private String magazineName;
+
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
+
+    @NotNull
+    @Pattern(regexp = "^(public|rare)$", message= "Input must be 'public' or 'rare'")
     private String status;
 
     public Magazine() {

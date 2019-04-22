@@ -3,12 +3,17 @@ package com.finalproj.finalproject.service;
 import com.finalproj.finalproject.model.Magazine;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Date;
+
 public interface MagazineService {
 
-    public ResponseEntity<?> saveMagazine(Magazine magazine);
-    public ResponseEntity<?> updateMagazine(int magazineId,Magazine magazine);
-    public ResponseEntity<?> getMagazine(int magazineId);
-    public ResponseEntity<?> deleteMagazine(int magazineId);
-    public ResponseEntity<?> getAllMagazines();
+    ResponseEntity<?> saveMagazine(Magazine magazine);
+    ResponseEntity<?> updateMagazine(int magazineId,Magazine magazine);
+    ResponseEntity<?> getMagazine(int magazineId);
+    ResponseEntity<?> deleteMagazine(int magazineId);
+    ResponseEntity<?> getAllMagazines();
+    ResponseEntity<?> getMagazineByDate(Date startDate, Date endDate);
+    ResponseEntity<?> getMagazineByName(String name);
+    ResponseEntity<?> getMagazineByStatus(String name);
 
 }

@@ -6,10 +6,17 @@ import org.springframework.http.ResponseEntity;
 
 public interface BookService {
 
-    public ResponseEntity<?> saveBook(BookDTO bookDTO);
-    public ResponseEntity<?> updateBook(int bookId,BookDTO bookDTO);
-    public ResponseEntity<?> getBook(int bookId);
-    public ResponseEntity<?> deleteBook(int bookId);
-    public ResponseEntity<?> getAllBooks();
+    ResponseEntity<?> saveBook(BookDTO bookDTO);
+    ResponseEntity<?> updateBook(int bookId,BookDTO bookDTO);
+    ResponseEntity<?> getBook(int bookId);
+    ResponseEntity<?> deleteBook(int bookId);
+    ResponseEntity<?> getAllBooks();
+    ResponseEntity<?> getBookspublishType(String type);
+    ResponseEntity<?> getBooksByYear(String year);
+    ResponseEntity<?> getBooksByCaregoryName(String categoryName);
+    ResponseEntity<?> getBooksByCaregoryId(int categoryId);
+    ResponseEntity<?> getBooksByAuthorId(int authorId);
+    ResponseEntity<?> getBooksByAuthorName(String name);
+    ResponseEntity<?> getBooksByTitle(String title);
 
 }

@@ -41,4 +41,13 @@ public class ManuscriptController {
         return manuscriptService.getAllManuscripts();
     }
 
+    @GetMapping("/filter-by-year")
+    public ResponseEntity<?> getManuscriptByYear(@RequestParam("year") String year){
+        return manuscriptService.getManuscriptByYear(year);
+    }
+
+    @GetMapping("/filter-by-name")
+    public ResponseEntity<?> getManuscriptByName(@RequestParam("name") String name){
+        return manuscriptService.getManuscriptByName(name);
+    }
 }

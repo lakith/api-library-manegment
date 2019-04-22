@@ -1,5 +1,6 @@
 package com.finalproj.finalproject.service.impl;
 
+import com.finalproj.finalproject.model.Book;
 import com.finalproj.finalproject.model.Magazine;
 import com.finalproj.finalproject.model.ResponseModel;
 import com.finalproj.finalproject.repository.MagazinesRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -125,6 +127,36 @@ public class MagazineServiceImpl implements MagazineService {
             responseModel.setMessage("Failed To Delete Magazine");
             responseModel.setStatus(false);
             return new ResponseEntity<>(responseModel,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getMagazineByDate(Date startDate,Date endDate) {
+        List<Magazine> magazineList = magazinesRepository.getMagazinesByDate(startDate,endDate);
+        if(magazineList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(magazineList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getMagazineByName(String name) {
+        List<Magazine> magazineList = magazinesRepository.getMagazinesByName(name);
+        if(magazineList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(magazineList,HttpStatus.OK);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<?> getMagazineByStatus(String name) {
+        List<Magazine> magazineList = magazinesRepository.getMagazinesByName(name);
+        if(magazineList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(magazineList,HttpStatus.OK);
         }
     }
 

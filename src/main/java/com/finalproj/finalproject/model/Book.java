@@ -1,6 +1,8 @@
 package com.finalproj.finalproject.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "books")
@@ -9,11 +11,17 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookId;
+    @NotNull
     private String title;
+    @NotNull
     private String isbnNumber;
-    private String year;
+    private int year;
+    @NotNull
     private double price;
+    @NotNull
     private String publisher;
+    @NotNull
+    @Pattern(regexp = "^(public|rare)$", message= "Input must be 'public' or 'rare'")
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,11 +59,11 @@ public class Book {
         this.isbnNumber = isbnNumber;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

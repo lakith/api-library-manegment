@@ -147,6 +147,26 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public ResponseEntity<?> getAllActivateUsers(){
+        List<User> userList = userRepository.getAllActiveUsers();
+        if(userList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(userList,HttpStatus.OK);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getAllDeactivateUsers(){
+        List<User> userList = userRepository.getAllDeactivatedUsers();
+        if(userList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(userList,HttpStatus.OK);
+        }
+    }
+
 
     private String createJWtWithOutPrefix(User user) {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();

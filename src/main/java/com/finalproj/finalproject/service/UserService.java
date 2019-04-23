@@ -12,4 +12,8 @@ public interface UserService {
 
     ResponseEntity<?> activateAUser(int userId);
 
+    ResponseEntity<?> getAllActivateUsers();
+
+    ResponseEntity<?> getAllDeactivateUsers();
+
 }

@@ -41,6 +41,14 @@ public class UserController {
         return userService.activateAUser(userId);
     }
 
+    @GetMapping("/active-users")
+    public ResponseEntity activeUsers(){
+        return userService.getAllActivateUsers();
+    }
 
+    @GetMapping("/deactivated-users")
+    public ResponseEntity deactivatedUsers(){
+        return userService.getAllDeactivateUsers();
+    }
 
 }

@@ -12,7 +12,7 @@ import java.util.Date;
 public class Magazine{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int magazineId;
 
     @NotNull

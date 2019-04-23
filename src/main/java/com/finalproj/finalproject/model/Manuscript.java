@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 public class Manuscript {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int manuscriptId;
 
     @NotNull

@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bookId;
     @NotNull
     private String title;

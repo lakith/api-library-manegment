@@ -69,6 +69,14 @@ public class UserServiceImpl implements UserService {
         newUser.setUserRole(optionalUserRole.get());
         newUser.setPassword(encryptedPassword);
 
+        if(optionalUserRole.get().getRoleType() ==  "LOCAL" ){
+            newUser.setActive(true);
+        } else if(optionalUserRole.get().getRoleType() == "ADMIN"){
+            newUser.setActive(true);
+        } else {
+            newUser.setActive(false);
+        }
+
         try {
             userRepository.save(newUser);
             responseModel.setMessage("User Added Successfully!");

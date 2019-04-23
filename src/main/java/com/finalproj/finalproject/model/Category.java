@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
     private String categoryName;
 

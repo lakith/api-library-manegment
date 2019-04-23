@@ -1,35 +1,38 @@
 package com.finalproj.finalproject.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "books")
+@XmlRootElement
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bookId;
-    @NotNull
+
     private String title;
-    @NotNull
+
     private String isbnNumber;
     private int year;
-    @NotNull
+
     private double price;
-    @NotNull
+
     private String publisher;
-    @NotNull
+
     @Pattern(regexp = "^(public|rare)$", message= "Input must be 'public' or 'rare'")
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "authorId")
+    @JoinColumn(name = "author_book_id")
     private Author author;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "category_book_id")
     private Category category;
 
     public Book() {

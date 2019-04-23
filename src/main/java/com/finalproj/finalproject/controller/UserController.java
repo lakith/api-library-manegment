@@ -51,4 +51,6 @@ public class UserController {
         return userService.getAllDeactivateUsers();
     }
 
+    //https://www.callicoder.com/spring-boot-actuator-metrics-monitoring-dashboard-prometheus-grafana/
+
 }

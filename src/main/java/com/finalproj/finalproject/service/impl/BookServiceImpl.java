@@ -60,10 +60,14 @@ public class BookServiceImpl implements BookService {
             book.setPrice(bookDTO.getPrice());
             book.setPublisher(bookDTO.getPublisher());
             book.setStatus(bookDTO.getStatus());
-            book.setCategory(optionalCategory.get());
-            book.setAuthor(optionalAuthor.get());
-
             book=bookRepository.save(book);
+
+//            List<Book> bookListAuthor = new ArrayList<>();
+//            List<Book> bookListCategory = new ArrayList<>();
+
+//            if(!optionalAuthor.get().getBookList().isEmpty()){
+//                bookListAuthor = optionalAuthor.get().getBookList();
+//            }
 
             if (book != null) {
                 responseModel.setMessage("Book Saved Successfully");

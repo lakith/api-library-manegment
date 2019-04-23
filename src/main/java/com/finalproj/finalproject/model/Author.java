@@ -2,6 +2,7 @@ package com.finalproj.finalproject.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "author")
@@ -13,8 +14,20 @@ public class Author {
     @NotNull
     private String authorName;
 
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "author_book_id")
+//    private List<Book> bookList;
+
     public Author() {
     }
+
+//    public List<Book> getBookList() {
+//        return bookList;
+//    }
+//
+//    public void setBookList(List<Book> bookList) {
+//        this.bookList = bookList;
+//    }
 
     public int getAuthorId() {
         return authorId;

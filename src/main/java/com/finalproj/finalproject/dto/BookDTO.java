@@ -1,15 +1,26 @@
 package com.finalproj.finalproject.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class BookDTO {
 
     private int bookId;
+    @NotNull
     private String title;
+    @NotNull
     private String isbnNumber;
+    @NotNull
     private int year;
+    @NotNull
     private double price;
+    @NotNull
     private String publisher;
+    @Pattern(regexp = "^(public|rare)$", message= "Input must be 'public' or 'rare'")
     private String status;
+    @NotNull
     private int authorId;
+    @NotNull
     private int categoryId;
 
     public BookDTO() {

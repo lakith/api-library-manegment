@@ -6,6 +6,9 @@ import javax.sql.DataSource;
 import com.finalproj.finalproject.jwt.JwtTokenAuthenticationConfig;
 import com.finalproj.finalproject.jwt.JwtTokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.actuate.context.ShutdownEndpoint;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -64,6 +67,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
     }
 
 
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -71,6 +75,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
                 .csrf().disable()
                 .logout().disable()
                 .formLogin().disable()
+                .authorizeRequests()
+                .requestMatchers(EndpointRequest.to(ShutdownEndpoint.class))
+                .hasRole("ACTUATOR_ADMIN")
+                .requestMatchers(EndpointRequest.toAnyEndpoint())
+                .permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .permitAll()
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .anonymous()
